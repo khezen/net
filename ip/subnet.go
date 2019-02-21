@@ -45,7 +45,8 @@ func SubnetIPV4(ipv4 string, mask int) (subnet string, err error) {
 		fragIndex--
 	}
 	// format subnet and return result
-	return fmt.Sprintf("%d.%d.%d.%d/%d",
+	return fmt.Sprintf(
+		"%d.%d.%d.%d/%d",
 		ipFragments[0],
 		ipFragments[1],
 		ipFragments[2],
