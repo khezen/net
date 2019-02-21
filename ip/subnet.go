@@ -2,16 +2,15 @@ package ip
 
 import (
 	"bytes"
-	"fmt"
 	"math"
 	"strconv"
 )
 
-// SubnetIPV4 - takes an ip v4 as string("192.168.220.254") and a subnet as int (17)
-// and returns a the corresponding subnet as string ("192.168.92.0/17")
+// SubnetIPV4 - takes an ip v4 as string("192.168.220.254") and a subnet mask as int(17)
+// and returns a the corresponding subnet as string("192.168.92.0/17")
 func SubnetIPV4(ipv4 string, mask int) (subnet string, err error) {
 	if mask < 0 || mask > 32 {
-		return "", fmt.Errorf("subnet mask out of bound:%d", mask)
+		return "", ErrMaskOutOfBound
 	}
 	// parse ip into 4 fragments
 	var (
