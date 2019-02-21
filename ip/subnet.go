@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"strconv"
+	"strings"
 )
 
 // SubnetIPV4 - takes an ip v4 as string("192.168.220.254") and a subnet mask as int(17)
@@ -14,13 +15,13 @@ func SubnetIPV4(ipv4 string, mask int) (subnet string, err error) {
 	}
 	// parse ip into 4 fragments
 	var (
+		ipSplit     = strings.Split(ipv4, ".")
 		ipFragments = make([]uint8, 0, 4)
 		fragmentStr string
 		fragmentInt int
-		i           int
 	)
-	for i = 0; i < 15; i += 4 {
-		fragmentStr = ipv4[i : i+3]
+
+	for _, fragmentStr = range ipSplit {
 		fragmentInt, err = strconv.Atoi(fragmentStr)
 		if err != nil {
 			return "", err
