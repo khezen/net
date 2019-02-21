@@ -1,7 +1,7 @@
 package ip
 
 import (
-	"bytes"
+	"fmt"
 	"math"
 	"strconv"
 )
@@ -45,13 +45,11 @@ func SubnetIPV4(ipv4 string, mask int) (subnet string, err error) {
 		fragIndex--
 	}
 	// format subnet and return result
-	subnetBuf := bytes.NewBuffer([]byte{})
-	for i = 0; i < 3; i++ {
-		subnetBuf.WriteString(strconv.Itoa(int(ipFragments[i])))
-		subnetBuf.WriteRune('.')
-	}
-	subnetBuf.WriteString(strconv.Itoa(int(ipFragments[3])))
-	subnetBuf.WriteRune('/')
-	subnetBuf.WriteString(strconv.Itoa(mask))
-	return subnetBuf.String(), nil
+	return fmt.Sprintf("%d.%d.%d.%d/%d",
+		ipFragments[0],
+		ipFragments[1],
+		ipFragments[2],
+		ipFragments[3],
+		mask,
+	), nil
 }
