@@ -27,7 +27,7 @@ func SubnetIPV4(ipv4 string, mask int) (subnet string, err error) {
 	for _, fragmentStr = range ipSplit {
 		fragmentInt, err = strconv.Atoi(fragmentStr)
 		if err != nil {
-			return "", err
+			return "", ErrUnparsableIPV4
 		}
 		ipFragments = append(ipFragments, uint8(fragmentInt))
 	}
