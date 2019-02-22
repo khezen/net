@@ -19,14 +19,15 @@ func TestSubnetIPV4(t *testing.T) {
 		{"192.168.220.254", 32, "192.168.220.254/32", nil},
 		{"192.168.220.254", -1, "", ErrMaskOutOfBound},
 		{"192.168.220.254", 33, "", ErrMaskOutOfBound},
+		{"ip address", 5, "", ErrUnparsableIPV4},
 	}
 	for _, c := range cases {
 		subnet, err := SubnetIPV4(c.ipv4, c.mask)
 		if subnet != c.subnet {
-			t.Errorf("expected %vv, got %v", c.subnet, subnet)
+			t.Errorf("expected %v, got %v", c.subnet, subnet)
 		}
 		if err != c.err {
-			t.Errorf("expected %vv, got %v", c.err, err)
+			t.Errorf("expected %v, got %v", c.err, err)
 		}
 	}
 }
