@@ -13,6 +13,9 @@ func SubnetIPV4(ipv4 string, mask int) (subnet string, err error) {
 	if mask < 0 || mask > 32 {
 		return "", ErrMaskOutOfBound
 	}
+	if !IPV4Pattern.Match([]byte(ipv4)) {
+		return "", ErrUnparsableIPV4
+	}
 	// parse ip into 4 fragments
 	var (
 		ipSplit     = strings.Split(ipv4, ".")
